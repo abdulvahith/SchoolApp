@@ -1,0 +1,91 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<!-- The HTML 4.01 Transitional DOCTYPE declaration-->
+<!-- above set at the top of the file will set     -->
+<!-- the browser's rendering engine into           -->
+<!-- "Quirks Mode". Replacing this declaration     -->
+<!-- with a "Standards Mode" doctype is supported, -->
+<!-- but may lead to some differences in layout.   -->
+
+<html>
+<head>
+<script type="text/javascript">
+    
+    function checkId()
+    {
+    	var rollNo=document.studentlogin.rollno.value;
+    	var passWord=document.studentlogin.password.value;
+    	
+    	var url="logincheck?rollNo="+rollNo+"&password="+passWord;
+    	
+    	var request=new XMLHttpRequest();
+    	
+    	request.open("GET",url,true);
+    	request.send();
+    	
+    	request.onreadystatechange = function() 
+		  {
+    		
+		    if (request.readyState == 4 && request.status == 200) 
+		    {
+		    	if(request.responseText=="success")
+				  {
+		    		window.location.href="http://localhost:8888/studentoption.jsp?rollNo="+rollNo;
+				  }
+		    	else{
+		    		alert("Sorry username or password not correct")
+		    		  document.studentlogin.rollno.value="";
+		    		  document.studentlogin.password.value="";
+		    	}
+		    }
+		  };
+    }
+    
+    function checkAdminPassword()
+    {
+    	var adminPass=document.adminlogin.adminpassword.value;
+    	
+	var url="admincheck?adminpass="+adminPass;
+    	
+    	var request=new XMLHttpRequest();
+    	
+    	request.open("GET",url,true);
+    	request.send();
+    	
+    	request.onreadystatechange = function() 
+		  {
+    		
+		    if (request.readyState == 4 && request.status == 200) 
+		    {
+		    	if(request.responseText=="success")
+	    		{
+	    			window.location.href="http://localhost:8888/adminpage.jsp";
+	    		}	
+		    	else
+    			{
+    			alert("Sorry admin password not correct");
+    			document.adminlogin.adminpassword.value="";
+    			}
+		    }
+    }
+    }
+    </script>
+    
+    
+</head>
+
+<body>
+<h4>student login</h4>
+<form action="studentlogin" name="studentlogin" >
+<input type="text" name="rollno">: Roll No<br>
+<input type="password" name="password">: Password<br>
+<input type="button" name="button" value="clickhere" onclick="checkId	()"><br>
+</form>
+<a href="signup.jsp">new student signup here</a><br>
+<br><br><br>
+<h4>Admin login</h4>
+<form action="adminlogin" name="adminlogin">
+<input type="password" name="adminpassword">: Password<br>
+<input type="button" value="clickhere" onclick="checkAdminPassword()"><br>
+</form>
+</body>
+</html>
