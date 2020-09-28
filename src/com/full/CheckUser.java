@@ -12,7 +12,7 @@ import com.google.appengine.api.datastore.Query.FilterOperator;
 import com.google.appengine.api.datastore.Query.FilterPredicate;
 
 public class CheckUser {
-
+	int i =10;
 	static DatastoreService data = DatastoreServiceFactory.getDatastoreService();
 	
 	
